@@ -1,0 +1,233 @@
+/* ==========================================================================
+   VERIFY.CSS
+   Styles for the standalone payment destination page (js/pages/verify.js).
+
+   LIGHT THEME:
+   This page intentionally breaks from the app's usual dark theme to match
+   the email templates it's linked from — full-bleed purple gradient with
+   a white card. Rather than rewriting every rule by hand, .verify-page-bg
+   redefines the same CSS variables (--surface, --text, --primary, etc.)
+   that buttons.css, trade.css, and trust.css already read from. Since
+   this class wraps the page's real content, the override cascades down
+   automatically. The one place this trick doesn't reach is the passphrase
+   popup — modals are appended to <body>, not nested inside this page, so
+   that's themed separately via modal.js's `theme: 'light'` option and
+   `.modal-theme-light` in modal.css.
+   ========================================================================== */
+
+.verify-page-bg {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #4B3FD9 0%, #6C5CE7 40%, #E8E5FC 100%);
+  padding: var(--space-xl) 0 var(--space-2xl);
+
+  --surface: #FFFFFF;
+  --surface-hover: #F3F1FE;
+  --surface-border: #E4E1FB;
+  --text: #1A1A1A;
+  --text-muted: #6B6B6B;
+  --text-faint: #9B9B9B;
+  --primary: #6C5CE7;
+  --primary-hover: #7C6EEB;
+  --primary-dim: #4B3FD9;
+  --warning: #B8790A;
+  --success: #1FAE7A;
+  --danger: #D6304A;
+  --shadow-glow: 0 0 24px rgba(108, 92, 231, 0.25);
+  --shadow-soft: 0 12px 32px rgba(75, 63, 217, 0.2);
+}
+
+/* The header logo sits directly on the dark-purple top of the gradient,
+   not on the white card, so it keeps light text regardless of the
+   overrides above (which are tuned for content sitting on the white card
+   further down the page). */
+.verify-page-bg .verify-header .landing-logo {
+  color: #FFFFFF;
+}
+
+.verify-page-bg .verify-header .landing-logo span {
+  color: #C9C1FF;
+}
+
+.verify-page-bg .trust-stars {
+  color: #F5A623;
+}
+
+/* Tint this box to match the new primary purple instead of the app's
+   default indigo, so it doesn't look mismatched against the new palette. */
+.verify-page-bg .verify-receiver {
+  background: rgba(108, 92, 231, 0.08);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+/* Sits directly on the gradient (outside the white card), and the
+   lightest part of the gradient is near-white — a plain gray footnote
+   would wash out there, so it gets a fixed, always-readable tone. */
+.verify-page-bg .verify-footnote {
+  color: rgba(26, 26, 26, 0.6);
+}
+
+.verify-page {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.verify-header {
+  display: flex;
+  justify-content: center;
+}
+
+.verify-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.verify-card h1 {
+  font-size: 22px;
+}
+
+.verify-card .text-muted {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.verify-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--surface-border);
+  border-bottom: 1px solid var(--surface-border);
+  padding: var(--space-md) 0;
+}
+
+.verify-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.verify-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.verify-value {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--text);
+}
+
+.verify-warning {
+  background: rgba(255, 178, 56, 0.08);
+  border: 1px solid rgba(255, 178, 56, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 13px;
+  color: var(--warning);
+  line-height: 1.5;
+}
+
+/* The receiver box is the single most important piece of info on this
+   page, so it gets its own visually distinct treatment — bordered in
+   the brand color rather than blending into the regular detail rows. */
+.verify-receiver {
+  background: rgba(111, 105, 241, 0.08);
+  border: 1px solid rgba(111, 105, 241, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.verify-receiver-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.verify-footnote {
+  font-size: 12px;
+  color: var(--text-faint);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ---- SELLER PASSPHRASE CONFIRMATION ---- */
+.verify-confirm-section {
+  border-top: 1px solid var(--surface-border);
+  padding-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.verify-confirm-section h2 {
+  font-size: 16px;
+}
+
+.verify-safe-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.verify-success {
+  border-top: 1px solid var(--surface-border);
+  padding-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.verify-success p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---- PROCESSING STATE (inside the passphrase popup) ---- */
+.verify-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+}
+
+.verify-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--surface-border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: verifySpin 0.8s linear infinite;
+}
+
+@keyframes verifySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.verify-loading p {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+}

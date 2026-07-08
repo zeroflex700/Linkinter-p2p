@@ -1,0 +1,238 @@
+/* ==========================================================================
+   TRADE.CSS
+   Shared styles for Trade History (list) and Trade Detail (the Trade
+   Window). Kept in one file since they share badge/status visual language.
+   ========================================================================== */
+
+/* ---- STATUS BADGES ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-warning {
+  background: rgba(255, 178, 56, 0.12);
+  color: var(--warning);
+  border: 1px solid rgba(255, 178, 56, 0.3);
+}
+
+.badge-primary {
+  background: rgba(111, 105, 241, 0.14);
+  color: var(--primary-hover);
+  border: 1px solid rgba(111, 105, 241, 0.3);
+}
+
+.badge-success {
+  background: rgba(45, 212, 167, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(45, 212, 167, 0.3);
+}
+
+.badge-danger {
+  background: rgba(255, 84, 112, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(255, 84, 112, 0.3);
+}
+
+/* ---- TRADE HISTORY LIST ---- */
+.trade-history-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.trade-history-page h1 {
+  font-size: 26px;
+}
+
+.trade-history-page .text-muted {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+.trade-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.trade-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: background var(--transition-fast);
+}
+
+.trade-row:hover {
+  background: var(--surface-hover);
+}
+
+.trade-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trade-row-id {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.trade-row-counterparty {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.trade-row-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.trade-row-fiat {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl) 0;
+  color: var(--text-muted);
+}
+
+.empty-state p {
+  margin-bottom: var(--space-md);
+}
+
+/* ---- TRADE DETAIL / TRADE WINDOW ---- */
+.trade-detail-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trade-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.trade-detail-header > div {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.trade-detail-id {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.escrow-indicator {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text-muted);
+}
+
+.escrow-locked {
+  color: var(--warning);
+  border-color: rgba(255, 178, 56, 0.3);
+}
+
+.escrow-released {
+  color: var(--success);
+  border-color: rgba(45, 212, 167, 0.3);
+}
+
+.trade-detail-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trade-amount-crypto {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.trade-amount-fiat {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.trade-detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.trade-detail-meta strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.trade-timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 178, 56, 0.08);
+  border: 1px solid rgba(255, 178, 56, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-size: 14px;
+}
+
+.trade-timer-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--warning);
+}
+
+.off-path-message {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: var(--space-sm);
+}
+
+.payment-proof-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.payment-proof-card h3 {
+  font-size: 15px;
+  margin-bottom: var(--space-sm);
+}
+
+.payment-proof-card p {
+  margin-bottom: var(--space-sm);
+  font-size: 14px;
+}
+
+.trade-detail-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}

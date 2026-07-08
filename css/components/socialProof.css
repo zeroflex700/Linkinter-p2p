@@ -1,0 +1,58 @@
+/* ==========================================================================
+   SOCIALPROOF.CSS
+   Styles for the ambient activity ticker (js/components/socialProof.js).
+   Positioned bottom-left, deliberately separate from #toast-container
+   (bottom-center) so real trade notifications and ambient social proof
+   never visually compete for the same spot.
+   ========================================================================== */
+
+#social-proof-container {
+  position: fixed;
+  bottom: var(--space-lg);
+  left: var(--space-lg);
+  z-index: 90;
+  pointer-events: none;
+}
+
+.social-proof-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--ink-raised);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-soft);
+  max-width: 280px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.social-proof-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-proof-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+  flex-shrink: 0;
+}
+
+/* Hide on very small screens if it ever overlaps bottom nav elements */
+@media (max-width: 380px) {
+  #social-proof-container {
+    left: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  .social-proof-card {
+    max-width: none;
+  }
+}

@@ -1,0 +1,112 @@
+/* ==========================================================================
+   CREATELINK.CSS
+   Styles for the manual payment link creator form (js/pages/createLink.js).
+   ========================================================================== */
+
+.create-link-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  max-width: 560px;
+}
+
+.create-link-page h1 {
+  font-size: 26px;
+}
+
+.create-link-page .text-muted {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+.create-link-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-body);
+}
+
+.form-group textarea {
+  font-family: var(--font-mono);
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+}
+
+.generated-link-box {
+  margin-top: var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.generated-link-box label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.generated-link-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.generated-link-row input {
+  flex: 1;
+  min-width: 0;
+  background: var(--ink);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.generated-link-preview {
+  font-size: 13px;
+  color: var(--primary-hover);
+  align-self: flex-start;
+}
+
+/* Stack the two amount/currency-style fields on very narrow phones */
+@media (max-width: 420px) {
+  .form-row {
+    flex-direction: column;
+  }
+}

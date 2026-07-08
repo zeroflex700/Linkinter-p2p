@@ -1,0 +1,299 @@
+/* ==========================================================================
+   LANDING.CSS
+   Styles scoped to the landing page only. All classes here are prefixed
+   .landing- so they never accidentally clash with other pages.
+   ========================================================================== */
+
+.landing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) 0;
+}
+
+.landing-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.landing-logo span {
+  color: var(--primary);
+}
+
+.landing-nav-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* ---- HERO ---- */
+.landing-hero {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.landing-hero-copy {
+  max-width: 560px;
+}
+
+.landing-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--success);
+  background: rgba(45, 212, 167, 0.1);
+  border: 1px solid rgba(45, 212, 167, 0.25);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-lg);
+}
+
+.landing-eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+.landing-hero h1 {
+  font-size: 40px;
+  margin-bottom: var(--space-md);
+}
+
+.landing-hero h1 em {
+  font-style: normal;
+  color: var(--primary);
+}
+
+.landing-hero p {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: var(--space-lg);
+}
+
+.landing-trust-score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.trust-stars {
+  color: var(--warning);
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.trust-score-text {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.landing-hero-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.landing-trust-badge-wrap {
+  margin-top: var(--space-lg);
+}
+
+.landing-trust-strip-section {
+  padding: var(--space-lg) 0 var(--space-xl);
+}
+
+/* ---- SIGNATURE ELEMENT: LEDGER STRIP ----
+   A live-feeling strip of trade confirmations, styled like blockchain
+   confirmation ticks rather than a generic progress bar. This is the
+   one deliberately "showy" element on the page — everything else stays
+   quiet so this has room to stand out. */
+.ledger-strip {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-soft);
+}
+
+.ledger-strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.ledger-strip-header span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.ledger-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.ledger-tick {
+  flex: 1;
+  height: 28px;
+  border-radius: 4px;
+  background: var(--surface-border);
+  position: relative;
+}
+
+.ledger-tick.filled {
+  background: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.ledger-tick.pulsing {
+  animation: ledgerPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes ledgerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ledger-strip-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ledger-strip-footer .status-success {
+  color: var(--success);
+}
+
+/* ---- FEATURES ---- */
+.landing-features {
+  padding: var(--space-2xl) 0;
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.feature-card .feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: rgba(111, 105, 241, 0.15);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: var(--space-md);
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ---- SECURITY PRACTICES (generic, non-branded) ---- */
+.landing-security {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--surface-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.landing-security-label {
+  font-size: 12px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.security-badges {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.security-badge {
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+}
+
+/* ---- FOOTER ---- */
+.landing-footer {
+  border-top: 1px solid var(--surface-border);
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  color: var(--text-faint);
+  font-size: 13px;
+}
+
+.landing-footer-links {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+/* ---- TABLET / DESKTOP ---- */
+@media (min-width: 768px) {
+  .landing-hero {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .landing-hero-copy {
+    flex: 1;
+  }
+
+  .landing-hero h1 {
+    font-size: 56px;
+  }
+
+  .ledger-strip {
+    flex: 1;
+    max-width: 440px;
+  }
+
+  .landing-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .landing-footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

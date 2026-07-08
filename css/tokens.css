@@ -1,0 +1,72 @@
+/* ==========================================================================
+   TOKENS.CSS
+   This file is the single source of truth for the visual identity.
+   If you want to change a color, font, spacing value, or radius anywhere
+   in the app, change it HERE and it updates everywhere automatically.
+   Never hardcode a color/spacing value directly in a component file —
+   always reference one of these variables instead.
+   ========================================================================== */
+
+:root {
+
+  /* ---- BRAND COLORS ----
+     #6F69F1 is the anchor color for the whole platform (given by spec).
+     Everything else is built to sit comfortably next to it. */
+  --primary: #6F69F1;
+  --primary-hover: #837DFF;   /* lighter, used on hover states */
+  --primary-dim: #4A45A8;     /* darker, used for pressed/active states */
+
+  /* ---- BACKGROUND ----
+     Deep indigo-black rather than pure #000 — keeps the brand color
+     feeling warm instead of cold/generic. */
+  --ink: #0F0E17;
+  --ink-raised: #16141F;      /* slightly lighter, used for elevated sections */
+
+  /* ---- GLASS SURFACES ----
+     Used for cards, modals, nav bars. Glassmorphism per design brief. */
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+  --surface-border: rgba(255, 255, 255, 0.08);
+
+  /* ---- STATUS COLORS ----
+     Used consistently across trade badges, toasts, escrow indicators. */
+  --success: #2DD4A7;   /* trade completed / funds released */
+  --danger: #FF5470;    /* cancelled / disputed */
+  --warning: #FFB238;   /* pending / awaiting action */
+
+  /* ---- TEXT ---- */
+  --text: #F5F4FF;
+  --text-muted: #9B96C7;
+  --text-faint: #5F5A85;
+
+  /* ---- TYPOGRAPHY ----
+     Sora = display/headlines. Inter = body copy. JetBrains Mono = data
+     (trade IDs, wallet addresses, transaction hashes) — this mono usage
+     is a deliberate signature: it makes financial data feel authentic. */
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ---- SPACING SCALE ----
+     Use these instead of arbitrary px values so spacing stays consistent. */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+
+  /* ---- RADIUS ---- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  /* ---- SHADOWS ---- */
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 40px rgba(111, 105, 241, 0.25);
+
+  /* ---- TRANSITIONS ---- */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}

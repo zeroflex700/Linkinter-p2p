@@ -1,0 +1,58 @@
+/* ==========================================================================
+   NAVBAR.CSS
+   Styles for the persistent interior-app nav bar (js/components/navbar.js).
+   ========================================================================== */
+
+.app-navbar {
+  border-bottom: 1px solid var(--surface-border);
+  background: rgba(15, 14, 23, 0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  flex-wrap: wrap;
+}
+
+.app-navbar-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.navbar-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: var(--text);
+}
+
+.guest-badge {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+/* On small phones, push the link row to its own full-width line so
+   nothing gets cramped or clipped. */
+@media (max-width: 640px) {
+  .app-navbar-links {
+    order: 3;
+    width: 100%;
+    justify-content: space-around;
+  }
+}

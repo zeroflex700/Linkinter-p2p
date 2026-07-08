@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- width=device-width + initial-scale=1 is essential for mobile —
+       without it, phones render the page zoomed out like a desktop site -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeVault — Peer-to-peer crypto trading</title>
+
+  <!-- Google Fonts CDN: no font files to manage on your phone.
+       Sora = headings, Inter = body, JetBrains Mono = trade data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS load order matters: tokens first (variables), then base (resets),
+       then layout (structure), then components, then page-specific styles -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/toast.css">
+  <link rel="stylesheet" href="css/components/modal.css">
+  <link rel="stylesheet" href="css/components/trust.css">
+  <link rel="stylesheet" href="css/components/socialProof.css">
+  <link rel="stylesheet" href="css/pages/landing.css">
+  <link rel="stylesheet" href="css/pages/dashboard.css">
+  <link rel="stylesheet" href="css/pages/trade.css">
+  <link rel="stylesheet" href="css/pages/market.css">
+  <link rel="stylesheet" href="css/pages/verify.css">
+  <link rel="stylesheet" href="css/pages/createLink.css">
+</head>
+<body>
+
+  <!-- #app is the root of the whole SPA. #app-view is where the router
+       injects whatever page is currently active. Nothing should ever
+       be added outside of #app. -->
+  <div id="app">
+    <div id="app-view"></div>
+  </div>
+
+  <!-- Toast notifications render into this container from anywhere in
+       the app via components/toast.js -->
+  <div id="toast-container"></div>
+
+  <!-- Ambient "recent activity" cards render here via components/socialProof.js -->
+  <div id="social-proof-container"></div>
+
+  <!-- type="module" lets us use import/export across js files without
+       a bundler — the browser resolves the imports itself. -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

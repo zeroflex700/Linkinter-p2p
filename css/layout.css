@@ -1,0 +1,34 @@
+/* ==========================================================================
+   LAYOUT.CSS
+   Structural layout for the app shell — the fixed elements that wrap
+   around whatever page the router is currently showing.
+   ========================================================================== */
+
+/* The single root element in index.html that everything mounts into */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* This is where router.js injects the current page's HTML.
+   Every page module renders INSIDE this container — never outside it. */
+#app-view {
+  flex: 1;
+  width: 100%;
+}
+
+/* Simple content-width constraint used across pages so text/cards
+   don't stretch edge-to-edge on tablet/desktop. */
+.container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-xl);
+  }
+}

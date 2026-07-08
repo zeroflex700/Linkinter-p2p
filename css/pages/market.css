@@ -1,0 +1,120 @@
+/* ==========================================================================
+   MARKET.CSS
+   Styles for the marketplace offer list and filter bar.
+   ========================================================================== */
+
+.market-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.market-page h1 {
+  font-size: 26px;
+}
+
+.market-page .text-muted {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: var(--space-lg);
+}
+
+.market-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.market-filter-bar label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.market-filter-bar select,
+.offer-payment-select {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.offer-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.offer-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.offer-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.offer-trader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 500;
+}
+
+.offer-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-faint);
+}
+
+.offer-status-dot.online {
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+}
+
+.offer-rate {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.offer-limits {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.offer-methods {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.offer-method-tag {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+}
+
+.offer-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.offer-actions .btn {
+  flex: 1;
+  min-width: 120px;
+}
