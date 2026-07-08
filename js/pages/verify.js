@@ -141,7 +141,7 @@ setTimeout(async () => {
     closeModal();
     onVerified();
   }
-}, 500); // Ensure VERIFICATION_DELAY_MS is defined or replaced with a number
+}, 3000); // Ensure VERIFICATION_DELAY_MS is defined or replaced with a number
 
   });
 }
