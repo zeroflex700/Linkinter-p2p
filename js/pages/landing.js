@@ -17,7 +17,7 @@ export function render() {
   return `
     <div class="container">
       <nav class="landing-nav">
-        <div class="landing-logo">Trade<span>Vault</span></div>
+        <div class="landing-logo">Interlink<span>Network</span></div>
         <div class="landing-nav-actions">
           <a href="#/dashboard" class="btn btn-secondary">Launch app</a>
         </div>
@@ -80,7 +80,7 @@ export function render() {
       </section>
 
       <footer class="landing-footer">
-        <span>© 2026 TradeVault</span>
+        <span>© 2026 Interlink Network</span>
         <div class="landing-footer-links">
           <a href="#/faq">FAQ</a>
           <a href="#/terms">Terms</a>

@@ -11,7 +11,7 @@
 
 // Prefix every key so we never collide with anything else stored in the
 // browser, and so it's obvious in devtools which keys belong to this app.
-const PREFIX = 'tradevault:';
+const PREFIX = 'interlink network:';
 
 /**
  * Reads a value by key. Returns `fallback` if the key doesn't exist yet

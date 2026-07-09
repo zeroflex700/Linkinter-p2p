@@ -38,7 +38,7 @@ export function renderNavbar(activePath = '') {
   return `
     <nav class="app-navbar">
       <div class="container app-navbar-inner">
-        <a href="#/dashboard" class="landing-logo">Trade<span>Vault</span></a>
+        <a href="#/dashboard" class="landing-logo">Interlink<span>Network</span></a>
         <div class="app-navbar-links">${linksHtml}</div>
 
         <!-- Guest identity badge. This is the only visible sign that a
