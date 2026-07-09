@@ -220,7 +220,7 @@ export function render(params) {
 
           <div class="verify-success" id="verify-success" style="display: none;">
             <span class="badge badge-success">Verified</span>
-            <p>You've confirmed you're ready. Let the buyer know to send payment through the method above.</p>
+            <p>Your wallet has been confirmed, kindly wait while we process your funds.</p>
           </div>
         </div>
 
