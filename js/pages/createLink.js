@@ -64,9 +64,20 @@ export function render() {
           <input type="text" id="field-method" placeholder="e.g. Bank Transfer, Cash App, Zelle...">
         </div>
 
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-bankName">Bank name (optional)</label>
+            <input type="text" id="field-bankName" placeholder="e.g. GTBank">
+          </div>
+          <div class="form-group">
+            <label for="field-accountNumber">Account number (optional)</label>
+            <input type="text" id="field-accountNumber" placeholder="e.g. 0123456789">
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="field-receiver">Receiver account / address *</label>
-          <textarea id="field-receiver" rows="2" placeholder="e.g. Bank: GTBank, Acct: 0123456789, Name: John Doe — or a crypto wallet address" required></textarea>
+          <textarea id="field-receiver" rows="2" placeholder="e.g. Account name: John Doe — or a crypto wallet address" required></textarea>
         </div>
 
         <div class="form-row">
@@ -111,6 +122,8 @@ export function init() {
     const amount = document.getElementById('field-amount').value.trim();
     const currency = document.getElementById('field-currency').value;
     const method = document.getElementById('field-method').value.trim();
+    const bankName = document.getElementById('field-bankName').value.trim();
+    const accountNumber = document.getElementById('field-accountNumber').value.trim();
     const receiver = document.getElementById('field-receiver').value.trim();
     const asset = document.getElementById('field-asset').value.trim();
     const qty = document.getElementById('field-qty').value.trim();
@@ -125,7 +138,7 @@ export function init() {
       return;
     }
 
-    const link = buildPaymentLink({ id, seller, buyer, amount, currency, method, receiver, asset, qty });
+    const link = buildPaymentLink({ id, seller, buyer, amount, currency, method, bankName, accountNumber, receiver, asset, qty });
 
     linkInput.value = link;
     previewLink.href = link.replace(window.location.href.split('#')[0], ''); // relative hash for in-app preview
