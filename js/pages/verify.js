@@ -171,7 +171,7 @@ export function render(params) {
 
           ${(q.bankName || q.accountNumber || q.receiver) ? `
             <div class="verify-receiver">
-              <span class="verify-label">Your receiving details</span>
+              <span class="verify-label">Your receiving account</span>
               ${q.bankName ? `
                 <div class="verify-receiver-line">
                   <span class="verify-receiver-line-label">Bank Name</span>
@@ -194,7 +194,7 @@ export function render(params) {
           ` : ''}
 
           <div class="verify-warning">
-            Make sure these are really your receiving details. If anything above doesn't match what you set up, do not proceed.
+            Make sure this is really your account. If anything above doesn't match what you set up, do not proceed.
           </div>
 
           <div class="verify-confirm-section" id="verify-confirm-section">
