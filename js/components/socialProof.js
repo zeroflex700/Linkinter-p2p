@@ -51,7 +51,7 @@ function showOne() {
 
 /** Random delay so appearances feel occasional rather than metronomic. */
 function randomDelay() {
-  return 20000 + Math.random() * 20000; // 20–40 seconds
+  return 20000 + Math.random() * 20000; // 10–15 seconds
 }
 
 function scheduleNext() {
