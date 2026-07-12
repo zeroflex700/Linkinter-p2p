@@ -49,9 +49,9 @@ function showOne() {
   }, 4500);
 }
 
-/** Random delay so appearances feel occasional rather than metronomic. */
+/** Fixed interval between appearances, per request. */
 function randomDelay() {
-  return 20000 + Math.random() * 20000; // 10–15 seconds
+  return 15000; // 15 seconds
 }
 
 function scheduleNext() {
